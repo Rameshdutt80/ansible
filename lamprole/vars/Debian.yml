@@ -1,0 +1,10 @@
+---
+# vars file for roles
+pack_name: apache2
+php_packages:
+- php
+- libapache2-mod-php
+- php-mcrypt
+- php-mysql
+
+info_url : https://raw.githubusercontent.com/asquarezone/AnsibleZone/master/ClassRoomExamples/July2018/basics/info.php

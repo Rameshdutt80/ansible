@@ -1,0 +1,8 @@
+---
+# vars file for roles
+pack_name: httpd
+php_packages:
+- php
+- php-mysql
+
+info_url : https://raw.githubusercontent.com/asquarezone/AnsibleZone/master/ClassRoomExamples/July2018/basics/info.php

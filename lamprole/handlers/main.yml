@@ -1,0 +1,7 @@
+---
+# handlers file for roles
+- name: restart apache
+  service: 
+    name: "{{ pack_name }}"
+    enabled: yes
+    state: restarted

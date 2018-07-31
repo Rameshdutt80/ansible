@@ -1,0 +1,26 @@
+# trying for Centos on normal lamp project
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: installing apache2 and update packages
+    yum:
+      name: httpd
+      state: present
+    notify:
+    - restart httpd
+  - name: Php installing and adding additions packages to it
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - php
+      - php-mysql
+    notify:
+    - restart httpd
+    handlers:
+    - name: apache2 restarting
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted

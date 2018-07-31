@@ -1,0 +1,10 @@
+# executing the ping for host
+---
+- hosts: all
+  tasks:
+  - name: executing ping on host
+    ping:
+  apt:
+  - name: git
+    update_cache: yes
+    State: present

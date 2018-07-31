@@ -1,0 +1,57 @@
+# trying for ubuntu
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: installing apache2 and update packages
+    apt:
+      name: apache2
+      update_cache: yes
+      state: present
+    notify:
+    - restart apache
+    when: ansible_os_family == "Debian"
+  - name: installing apache2 and update packages
+    yum:
+      name: httpd
+      state: present
+    notify:
+    - restart httpd
+    when: ansible_os_family == "Redhat"
+  - name: Php installing and adding additions packages to it
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - php
+      - libapache2-mod-php
+      - php-mcrypt
+      - php-mysql
+    notify:
+    - restart apache
+    when: ansible_os_family == "Debian"
+  - name: Php installing and adding additions packages to it
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - php
+      - php-mysql
+    notify:
+    - restart httpd
+    when: ansible_os_family == "Redhat"
+    handlers:
+    - name: restart apache
+      service:
+        name: apache2
+        enabled: yes
+        state: restarted
+      when: ansible_os_family == "Debian"
+    - name: restart httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted
+      when: ansible_os_family == "Redhat"
+
+    

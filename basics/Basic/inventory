@@ -1,0 +1,15 @@
+[ubuntu]
+localhost
+ip-172-31-21-193.us-west-2.compute.internal
+
+[redhat]
+ip-172-31-30-116.us-west-2.compute.internal
+
+[webserver]
+localhost
+
+[ubuntu:vars]
+pack_name == apache2
+
+[redhat:vars]
+pack_name == httpd

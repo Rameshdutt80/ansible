@@ -10,10 +10,10 @@
       src: gameoflife.war
       dest:   
     notify:
-      - restart tomcat
+    - restart tomcat
   handlers:
   - name: restart tomcat
-    Service:
+    service:
       name: tomcat
       state: restarted
       enabled: yes

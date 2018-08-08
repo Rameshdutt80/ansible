@@ -1,0 +1,8 @@
+---
+# vars file for nodejsdp
+
+app_name: 
+  - nodejs
+  - build-essential
+
+private_ip: 172.31.20.108

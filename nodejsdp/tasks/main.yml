@@ -8,18 +8,20 @@
     url: https://deb.nodesource.com/setup_6.x
     dest: /home/ansible/nodesource_setup.sh
 - name: run the script 
-  command: bash nodesource_setup.sh
+  command: sudo bash nodesource_setup.sh
 - name: install nodejs application
   apt:
-    name: "{ app_name }"
+    name: "{{ item }}"
     state: present
+  with_items: "{{ app_name }}"
 - name: create a file hello.js and copy the content to the /home/ansible folder
-  file: path=/home/ansible/hello.js 
-  state: touch
+  file: 
+    path: "/home/ansible/hello.js "
+    state: touch
 - name: by using template updating the hello.js file
   template: 
     src: hello.js.j2
-    dest: /home/ansible/hello.js
+    dest: "/home/ansible/hello.js"
 - name: changing the permissions for hello.js
   command: chmod +x ./hello.js
 - name: installing pm2 via npm

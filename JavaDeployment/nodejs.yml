@@ -1,7 +1,27 @@
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
 ---
 - hosts: all
   become: yes 
-  tasks:
   roles:
     - geerlingguy.nodejs
+    - weareinteractive.pm2
+    - geerlingguy.nginx
+  tasks:
+  - name: Ansible create file if it doesn't exist example
+    file:
+      path: "/home/ansible/hell1.js"
+      state: touch
+  - name: creating hello.js with data in default home folder
+    copy:
+      dest: "/home/ansible/hello.js"
+      content: |
+        #!/usr/bin/env nodejs
+        var http = require('http');
+        http.createServer(function (req, res) {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Hello World\n');
+        }).listen(8080, 'localhost');
+        console.log('Server running at http://localhost:8080/');
+        
+    
    

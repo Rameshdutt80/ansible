@@ -8,7 +8,7 @@
   - name: copywar
     copy:
       src: gameoflife.war
-      dest: /opt/tomcat/webapps/gameoflife.war
+      dest:   
     notify:
       - restart tomcat
   handlers:

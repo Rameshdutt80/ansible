@@ -4,5 +4,8 @@
 app_name: 
   - nodejs
   - build-essential
-
+  
 private_ip: 172.31.20.108
+path-add: /home/ansible/hello.js
+packages-cen: nginx
+packages-cen1: epel-release

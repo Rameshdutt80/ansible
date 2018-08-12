@@ -14,14 +14,14 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ app_name }}"
-- name: create a file hello.js and copy the content to the /home/ansible folder
+- name: create a file hello.js 
   file: 
-    path: "/home/ansible/hello.js "
+    path: "{{ path-add }}"
     state: touch
-- name: by using template updating the hello.js file
+- name: by using template hello.js file and copy the content to the /home/ansible folder
   template: 
     src: hello.js.j2
-    dest: "/home/ansible/hello.js"
+    dest: "{{ path-add }}"
 - name: changing the permissions for hello.js
   command: chmod +x ./hello.js
 - name: installing pm2 via npm

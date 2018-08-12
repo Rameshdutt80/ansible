@@ -1,0 +1,49 @@
+# followed this url 
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7
+
+---
+# tasks file for nodejsdp
+- name: running the url
+  get_url:
+    url: https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz
+    dest: /home/ansible/
+- name: extracting tar file into node folder
+  command: tar xvf node-v*.tar.gz --strip-components=1 -C ./node
+- name: creating a node/etc directory 
+  file: 
+    path: /home/ansible/node/etc
+    state: directory
+- name: setting the data in npmrc
+  command: echo 'prefix=/usr/local' > node/etc/npmrc
+- name: move node into folder /opt/
+  command: sudo mv node /opt/
+- name: changing the owner on node
+  command: chown -R root: /opt/node
+- name: changing the owner on node
+  command: sudo ln -s /opt/node/bin/node /usr/local/bin/node
+- name: changing the owner on node
+  command: sudo ln -s /opt/node/bin/npm /usr/local/bin/npm
+- name: Updating the visudo file
+  template: 
+    src: visudo.j2
+    dest: /home/ansible/visudo
+- name: running the url
+  get_url:
+    url: http://169.254.169.254/metadata/v1/interfaces/private/0/ipv4/address
+    dest: /home/ansible/
+- name: Updating the visudo file
+  template: 
+    src: hello.js.j2
+    dest: /home/ansible
+- name: installing pm2 latest
+  command: npm install pm2@latest -g
+- name: starting hello.js via pm2 
+  command: pm2 start hello.js
+- name: starting the systemd 
+  command: sudo pm2 startup systemd
+- name: Installing the epel-release
+  yum:
+    name: "{{ item }}"
+  with_items: "{{ package-cen, package-cen }}"
+
+ 

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Update package and upgrade
+    apt:
+      update_cache: yes
+      upgrade: yes 
+  - name: install Tasksel
+    apt:
+      name : tasksel
+      State: present
+  - name: install lamp tasksel
+    command: tasksel install lamp-server
+
+
+    
+  

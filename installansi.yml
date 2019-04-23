@@ -1,0 +1,18 @@
+---
+- hosts: group1
+  become: yes
+  tasks:
+    - name: update package
+      apt:
+        update_catche: yes
+    - name: software properties common
+      apt:
+        name: software-properties-common
+        state: present
+    - name: add repositry
+      command: sudo apt-add-repository --yes --update ppa:ansible/ansible
+    - name: install ansible
+      apt:
+        name: ansible
+        state: present
+        update_cache: yes 

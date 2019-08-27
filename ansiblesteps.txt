@@ -1,0 +1,41 @@
+Step1
+Adduser jenkins
+
+step2
+To make permisions available
+Sudo Visudo
+
+Add new user like below
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+jenkins ALL=(ALL:ALL) NOPASSWD:ALL
+
+Step3:
+How to login from outside with the created ansible user
+
+sudo vi /etc/ssh/sshd_config
+
+PasswordAuthentication yes
+
+And do sudo service sshd restart
+
+Step4:
+Install ansible
+
+Step5:
+Inventrys will be in the path 
+Roles  also in the same path
+
+/etc/ansible  
+
+To check the connection is available 
+
+Ansible -m ping all
+
+And also we need to set ssh keygen
+
+Ssh-keygen
+Ssh-copy-id  private address/dns name/ username@dnsname
+
+
+
